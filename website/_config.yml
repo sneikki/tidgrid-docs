@@ -1,6 +1,6 @@
 domain: "tidgrid.dev"
-url: "https://tidgrid.dev"
-baseurl: "/tidgrid"
+url: "https://tidgrid.sneikki.lol"
+baseurl: ""
 title: "Tidgrid"
 version: "v0.1.0-alpha.2"
 

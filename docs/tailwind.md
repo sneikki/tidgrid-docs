@@ -3,15 +3,15 @@ layout: doc-page
 title: Tidgrid and Tailwind
 ---
 
-Tailwind scans the sources as plain text and generates CSS for every token that matches a utility. Tidgrid generates the stylesheet too, and it checks both the pages and the vocabulary: `build` or `check` fails when something is wrong.
+Tailwind scans the sources as plain text and generates CSS for every token that matches a utility. A token that matches none is thrown away: it gets no CSS and no message, because to the scanner a mistyped class is one more word in the file.
+
+Tidgrid generates the stylesheet too, and the checking is built in. It checks the pages against the vocabulary and the vocabulary against its own rules, and `build` or `check` fails when something is wrong.
 
 | Stage | What it catches |
 |---|---|
 | `check`, from the pages | an unknown class, a class name built from pieces, appearance in `style=`, own CSS, a stale stylesheet, a role nothing uses |
 | `build`, from the vocabulary | a raw value outside the tokens, the same lines in several roles, a mixin set that is not shared, a role without a `use` line |
 | `plan` | what a change does to the stylesheet, before it is built |
-
-In Tailwind a token that matches no utility is thrown away: it gets no CSS.
 
 ## No appearance atoms
 

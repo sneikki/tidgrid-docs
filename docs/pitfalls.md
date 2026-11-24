@@ -50,29 +50,6 @@ role("text", "section-title",
 {% endcapture %}
 {% include versus.html bad=bad good=good bad_in="in index.tg" good_in="in index.tg" %}
 
-### Class names in a lookup table
-
-Whole names in a table pass the rule against built names, but the table is a variable and `check` does not read it. The typo below is not named: the role is only reported as unused, and the obvious fix is to remove the role. Pass each name through a helper (`cn`, `clsx`, `cva`, `classNames`, `twMerge`, or the ones in `helpers` of `project()`) and the same typo fails as an unknown class.
-
-{% capture bad %}
-const kinds = {
-  primary: "tg-action(primery)",
-};
-{% endcapture %}
-{% capture good %}
-const kinds = {
-  primary: cn("tg-action(primary)"),
-};
-{% endcapture %}
-{% capture says %}
-$ tidgrid check
-[[index.tg:9:]] role tg-action(primary) is not used in the scanned sources: use it, remove it, or, if a script or lookup table sets it, write the name whole inside a helper call such as cn()
-…
-$ echo $?
-[[1]]
-{% endcapture %}
-{% include versus.html bad=bad good=good says=says bad_in="in kinds.js" good_in="in kinds.js" %}
-
 ### A colour passed through a custom property
 
 One role sets a private custom property and another reads it. The build accepts it, and nothing checks that the property is set where it is read: it is a channel beside the tokens. Write one role per variant.
@@ -198,6 +175,29 @@ $ tidgrid check
 [[src/Card.jsx:1:]] class name built from pieces: tg-kind(${kind}); write every whole name out in a lookup table
 {% endcapture %}
 {% include versus.html bad=bad good=good says=says bad_in="in Card.jsx" good_in="in Card.jsx" %}
+
+### Class names in a lookup table
+
+Whole names in a table pass the rule against built names, but the table is a variable and `check` does not read it. The typo below is not named: the role is only reported as unused, and the obvious fix is to remove the role. Pass each name through a helper (`cn`, `clsx`, `cva`, `classNames`, `twMerge`, or the ones in `helpers` of `project()`) and the same typo fails as an unknown class.
+
+{% capture bad %}
+const kinds = {
+  primary: "tg-action(primery)",
+};
+{% endcapture %}
+{% capture good %}
+const kinds = {
+  primary: cn("tg-action(primary)"),
+};
+{% endcapture %}
+{% capture says %}
+$ tidgrid check
+[[index.tg:9:]] role tg-action(primary) is not used in the scanned sources: use it, remove it, or, if a script or lookup table sets it, write the name whole inside a helper call such as cn()
+…
+$ echo $?
+[[1]]
+{% endcapture %}
+{% include versus.html bad=bad good=good says=says bad_in="in kinds.js" good_in="in kinds.js" %}
 
 ### A raw value in the vocabulary
 

@@ -1,3 +1,5 @@
+load("mixins.tg", "button", "layer", "link", "text")
+
 keyframes("drift", {
     "0%": {
         "transform": "translateX(0)",
@@ -26,11 +28,10 @@ keyframes("cell", {
 role(
     "text", "page-title",
     use = "The one title of a page (h1 or the first line). Never twice on a page.",
+    include = [text.heading],
     css = {
-        "font-family": "{font.title}",
         "font-size": "{type.h2}",
         "font-weight": "700",
-        "color": "{color.ink}",
         "@sm": {
             "font-size": "{type.h1}",
         },
@@ -43,11 +44,10 @@ role(
 role(
     "text", "section-title",
     use = "Heading of a section inside a page. Lighter than the page title.",
+    include = [text.heading],
     css = {
-        "font-family": "{font.title}",
         "font-size": "{type.h2}",
         "font-weight": "400",
-        "color": "{color.ink}",
     },
 )
 
@@ -63,12 +63,11 @@ role(
 role(
     "text", "tagline",
     use = "The one big statement under the hero wordmark on the front page.",
+    include = [text.heading],
     css = {
         "text-wrap": "balance",
-        "font-family": "{font.title}",
         "font-size": "{type.subtitle}",
         "font-weight": "400",
-        "color": "{color.ink}",
         "@lg": {
             "font-size": "{type.display}",
         },
@@ -78,13 +77,12 @@ role(
 role(
     "text", "punch",
     use = "The big statement that heads a scene of the front page: one or two short sentences. Not the heading of a docs section.",
+    include = [text.heading],
     css = {
-        "font-family": "{font.title}",
         "font-size": "{type.h1}",
         "font-weight": "700",
         "line-height": "1.1",
         "text-wrap": "balance",
-        "color": "{color.ink}",
         "@lg": {
             "font-size": "{type.hero}",
         },
@@ -128,24 +126,20 @@ role(
 role(
     "text", "wordmark",
     use = "The product name set in monospace, lowercase. Footer size; one per area.",
+    include = [text.wordmark],
     css = {
-        "font-family": "{font.mono}",
         "font-size": "{type.h2}",
         "text-transform": "lowercase",
-        "color": "{color.ink}",
-        "user-select": "none",
     },
 )
 
 role(
     "text", "wordmark-hero",
     use = "The huge product name of the front page hero. Pair with text(wordmark-accent) for the accent part.",
+    include = [text.wordmark],
     css = {
-        "font-family": "{font.mono}",
         "font-size": "{type.hero-narrow}",
         "line-height": "1.2",
-        "color": "{color.ink}",
-        "user-select": "none",
         "@xs": {
             "font-size": "{type.hero}",
         },
@@ -194,12 +188,11 @@ role(
 role(
     "text", "error-code",
     use = "The huge number on an error page.",
+    include = [text.heading],
     css = {
-        "font-family": "{font.title}",
         "font-size": "{type.hero}",
         "font-weight": "900",
         "text-align": "center",
-        "color": "{color.ink}",
     },
 )
 
@@ -295,11 +288,9 @@ role(
 role(
     "text", "note-title",
     use = "The heading line of a surface(note).",
+    include = [text.label],
     css = {
-        "font-family": "{font.title}",
         "font-size": "{type.label}",
-        "font-weight": "600",
-        "text-transform": "uppercase",
         "border-bottom": "{border.hair} solid {color.edge}",
     },
 )
@@ -307,11 +298,7 @@ role(
 role(
     "text", "caption",
     use = "A small label above a panel: who or what the panel is (Agent, tidgrid.toml, a command, Not like this). On a div when inside text(prose).",
-    css = {
-        "font-family": "{font.mono}",
-        "font-size": "{type.small}",
-        "color": "{color.ink-soft}",
-    },
+    include = [text.caption],
 )
 
 role(
@@ -345,14 +332,9 @@ role(
 role(
     "link", "nav",
     use = "A link in the main header navigation. Mark the page you are on with state(current).",
+    include = [text.label, link.base],
     css = {
-        "font-family": "{font.title}",
         "font-size": "{type.label}",
-        "font-weight": "600",
-        "text-transform": "uppercase",
-        "text-decoration": "none",
-        "color": "{color.ink}",
-        "transition": "color {motion.fast}",
         "&:hover": {
             "color": "{color.ink-soft}",
         },
@@ -379,12 +361,10 @@ role(
 role(
     "link", "entry",
     use = "One row of a list of pages: the whole row is the link, with a rule above it. Holds a sample on one side and text(entry-title) with a line of text(body) on the other.",
+    include = [link.base],
     css = {
         "display": "block",
         "border-top": "{border.hair} solid {color.drawer-edge}",
-        "text-decoration": "none",
-        "color": "{color.ink}",
-        "transition": "color {motion.fast}",
         "&:is(:hover, :focus-visible)": {
             "color": "{color.accent}",
         },
@@ -394,11 +374,9 @@ role(
 role(
     "link", "page",
     use = "A plain link in a list of pages: the documentation pages in the footer or beside a docs page. Mark the page being shown with state(current).",
+    include = [link.base],
     css = {
         "font-family": "{font.sans}",
-        "text-decoration": "none",
-        "color": "{color.ink}",
-        "transition": "color {motion.fast}",
         "&:hover": {
             "color": "{color.ink-soft}",
         },
@@ -412,14 +390,9 @@ role(
 role(
     "link", "footer-heading",
     use = "A main link in the footer (Home, Get started, a section name) or a licence name; uppercase.",
+    include = [text.label, link.base],
     css = {
-        "font-family": "{font.title}",
         "font-size": "{type.small}",
-        "font-weight": "600",
-        "text-transform": "uppercase",
-        "text-decoration": "none",
-        "color": "{color.ink}",
-        "transition": "color {motion.fast}",
         "&:hover": {
             "color": "{color.ink-soft}",
         },
@@ -429,11 +402,9 @@ role(
 role(
     "link", "breadcrumb",
     use = "One step of a breadcrumb trail, a link to a parent page. The last step is the page itself: add state(current). The arrow between steps is drawn by the role.",
+    include = [link.base],
     css = {
         "font-size": "{type.crumb}",
-        "text-decoration": "none",
-        "color": "{color.ink}",
-        "transition": "color {motion.fast}",
         "&:hover": {
             "color": "{color.ink-soft}",
         },
@@ -511,14 +482,8 @@ role(
 role(
     "action", "primary",
     use = "The one main button of a view: dark, filled. Put it first.",
+    include = [button.shape],
     css = {
-        "display": "block",
-        "padding": "{space.sm}",
-        "border-radius": "{radius.sm}",
-        "font-family": "{font.title}",
-        "font-weight": "700",
-        "text-align": "center",
-        "text-decoration": "none",
         "color": "{color.paper}",
         "background": "{color.ink}",
     },
@@ -527,14 +492,8 @@ role(
 role(
     "action", "secondary",
     use = "A second button beside the primary one: quiet, sand coloured.",
+    include = [button.shape],
     css = {
-        "display": "block",
-        "padding": "{space.sm}",
-        "border-radius": "{radius.sm}",
-        "font-family": "{font.title}",
-        "font-weight": "700",
-        "text-align": "center",
-        "text-decoration": "none",
         "color": "{color.ink}",
         "background": "{color.sand}",
     },
@@ -678,9 +637,8 @@ role(
 role(
     "surface", "progress",
     use = "The thin bar on the top edge that shows how far a story has been read. Once per page; story.js scales it.",
+    include = [layer.pinned],
     css = {
-        "position": "fixed",
-        "top": "0",
         "left": "0",
         "z-index": "2",
         "width": "{size.full}",
@@ -694,15 +652,13 @@ role(
 role(
     "surface", "tag",
     use = "One item of a surface(stream): a short name with its status word. With data-alarm it is the one item to notice.",
+    include = [text.caption],
     css = {
         "white-space": "nowrap",
         "padding": "{space.xs} {space.sm}",
         "border": "{border.hair} solid {color.drawer-edge}",
         "border-radius": "{radius.md}",
         "background": "{color.raised}",
-        "font-family": "{font.mono}",
-        "font-size": "{type.small}",
-        "color": "{color.ink-soft}",
         "&[data-alarm]": {
             "border-color": "{color.accent}",
             "color": "{color.ink}",
@@ -723,9 +679,8 @@ role(
 role(
     "surface", "grid",
     use = "The grid of fine lines behind every page: one fixed layer, first in body, hidden from assistive technology. The backdrop script moves it slower than the page.",
+    include = [layer.pinned],
     css = {
-        "position": "fixed",
-        "top": "0",
         "right": "0",
         "bottom": "calc({size.cell} * -1)",
         "left": "0",
@@ -773,10 +728,9 @@ role(
 role(
     "layout", "drawer",
     use = "The header navigation container. On small screens a panel fixed to the right edge, hidden until a script sets state(open); from sm up an ordinary inline block. Goes with surface(drawer).",
+    include = [layer.pinned],
     css = {
         "display": "none",
-        "position": "fixed",
-        "top": "0",
         "right": "0",
         "z-index": "3",
         "width": "{size.full}",

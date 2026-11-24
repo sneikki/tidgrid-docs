@@ -1,5 +1,4 @@
-# Repeated lines are not checked until repeats is removed; then build says which roles share lines.
-project(prefix = "tg", out = "assets/css/tidgrid.css", scan = [".", "../docs"], repeats = [])
+project(prefix = "tg", out = "assets/css/tidgrid.css", scan = [".", "../docs"])
 
 breakpoints({
     "xs": "36em",

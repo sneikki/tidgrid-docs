@@ -40,16 +40,16 @@ $ tidgrid check
 $ echo $?
 [[1]]
 {% endcapture %}
-{% capture toml_tokens %}
+{% capture tg_tokens %}
 color = tokens("color", {"ground": "#0f1214", "ink": "#e6e9eb", "accent": "#5ed5dc"})
 border = tokens("border", {"hair": "1px"})
 {% endcapture %}
-{% capture toml_card %}
+{% capture tg_card %}
 role("surface", "card",
     use = "A panel that lifts off the ground. One per group of related content.",
     css = {"border": "%s solid %s" % (border.hair, color.accent)})
 {% endcapture %}
-{% capture toml_title %}
+{% capture tg_title %}
 role("text", "title",
     use = "The one title of a page.",
     css = {"color": color.accent})
@@ -145,7 +145,7 @@ text(refused) = outside it.
     </div>
   </section>
 
-  {% comment %}Scene: the vocabulary, built up table by table.{% endcomment %}
+  {% comment %}Scene: the vocabulary, built up call by call.{% endcomment %}
   <section class="tg-center tg-width(full) tg-max-width(measure) tg-pad-x(md) tg-col tg-y-gap(xl) tg-pad-y(xxl)">
     <div class="tg-col tg-y-gap(md)">
       <h2 class="tg-text(punch)">The whole look. Decided once.</h2>
@@ -155,9 +155,9 @@ text(refused) = outside it.
     <div class="tg-max-width(reading) tg-col tg-y-gap(xs)">
       <p class="tg-text(caption)">index.tg</p>
       <div class="tg-surface(code) tg-col tg-y-gap(md)">
-        <div data-rise class="tg-motion(rise)"><pre><code>{{ toml_tokens | strip | escape }}</code></pre></div>
-        <div data-rise class="tg-motion(rise)"><pre><code>{{ toml_card | strip | escape }}</code></pre></div>
-        <div data-rise class="tg-motion(rise)"><pre><code>{{ toml_title | strip | escape }}</code></pre></div>
+        <div data-rise class="tg-motion(rise)"><pre><code>{{ tg_tokens | strip | escape }}</code></pre></div>
+        <div data-rise class="tg-motion(rise)"><pre><code>{{ tg_card | strip | escape }}</code></pre></div>
+        <div data-rise class="tg-motion(rise)"><pre><code>{{ tg_title | strip | escape }}</code></pre></div>
       </div>
     </div>
   </section>

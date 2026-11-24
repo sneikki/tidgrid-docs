@@ -5,7 +5,7 @@ title: The vocabulary file
 
 A project's vocabulary is written in Starlark, a small Python-like language. Its entry file is `index.tg`. The vocabulary defines every class a page may use. Anything not in it, `check` rejects. The point is a closed vocabulary, decided once and checked.
 
-Here is a whole one, in a single file. The calls below it are explained one by one.
+Here is a small whole one. The calls below it are explained one by one.
 
 {% capture c %}
 project(out = "src/styles/tidgrid.css", scan = ["src"])

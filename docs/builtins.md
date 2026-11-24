@@ -18,7 +18,7 @@ A vocabulary is a Starlark program, and these are the functions it calls. They a
 | `allow_css(path, reason)` | A stylesheet `check` accepts. |
 | `load(file, names...)`, `source(file)` | Run another file. See [files](/docs/files). |
 
-A call of each, in one file:
+A call of each:
 
 {% capture c %}
 project(out = "tidgrid.css", scan = ["."], repeats = [(3, 2), (2, 4)])

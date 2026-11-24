@@ -297,7 +297,7 @@ role(
 
 role(
     "text", "caption",
-    use = "A small label above a panel: who or what the panel is (Agent, tidgrid.toml, a command, Not like this). On a div when inside text(prose).",
+    use = "A small label above a panel: who or what the panel is (Agent, index.tg, a command, Not like this). On a div when inside text(prose).",
     include = [text.caption],
 )
 

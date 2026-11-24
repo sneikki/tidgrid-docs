@@ -41,23 +41,18 @@ $ echo $?
 [[1]]
 {% endcapture %}
 {% capture toml_tokens %}
-[tokens.color]
-ground = "#0f1214"
-ink    = "#e6e9eb"
-accent = "#5ed5dc"
-
-[tokens.border]
-hair = "1px"
+color = tokens("color", {"ground": "#0f1214", "ink": "#e6e9eb", "accent": "#5ed5dc"})
+border = tokens("border", {"hair": "1px"})
 {% endcapture %}
 {% capture toml_card %}
-[role.surface.card]
-use    = "A panel that lifts off the ground. One per group of related content."
-border = "{border.hair} solid {color.accent}"
+role("surface", "card",
+    use = "A panel that lifts off the ground. One per group of related content.",
+    css = {"border": "%s solid %s" % (border.hair, color.accent)})
 {% endcapture %}
 {% capture toml_title %}
-[role.text.title]
-use   = "The one title of a page."
-color = "{color.accent}"
+role("text", "title",
+    use = "The one title of a page.",
+    css = {"color": color.accent})
 {% endcapture %}
 {% capture list_run %}
 $ tidgrid list
@@ -158,7 +153,7 @@ text(refused) = outside it.
       <a class="tg-link(text) tg-self(start)" href="{{ site.baseurl }}/docs/vocabulary-file">The vocabulary file</a>
     </div>
     <div class="tg-max-width(reading) tg-col tg-y-gap(xs)">
-      <p class="tg-text(caption)">tidgrid.toml</p>
+      <p class="tg-text(caption)">index.tg</p>
       <div class="tg-surface(code) tg-col tg-y-gap(md)">
         <div data-rise class="tg-motion(rise)"><pre><code>{{ toml_tokens | strip | escape }}</code></pre></div>
         <div data-rise class="tg-motion(rise)"><pre><code>{{ toml_card | strip | escape }}</code></pre></div>

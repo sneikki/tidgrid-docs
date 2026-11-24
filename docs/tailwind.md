@@ -3,7 +3,7 @@ layout: doc-page
 title: Tidgrid and Tailwind
 ---
 
-Tailwind scans the sources as plain text and generates CSS for every token that matches a utility. A token that matches none is thrown away: it gets no CSS and no message, because to the scanner a mistyped class is one more word in the file.
+Tailwind scans the sources as plain text and generates CSS for every token that matches a utility. A token that matches none is thrown away: it gets no CSS and no message from the build, because to the scanner a mistyped class is one more word in the file.
 
 Tidgrid generates the stylesheet too, and the checking is built in. It checks the pages against the vocabulary and the vocabulary against its own rules, and `build` or `check` fails when something is wrong.
 
@@ -15,11 +15,11 @@ Tidgrid generates the stylesheet too, and the checking is built in. It checks th
 
 ## No appearance atoms
 
-Tailwind has an atom for colour, border and shadow: `border-l-4`, `border-blue-500`, `shadow-md`. An agent composes a look on every element it writes. A coloured stripe on the left edge of a box is two such atoms.
+Tailwind has an atom for colour, border and shadow: `border-l-4`, `border-blue-500`, `shadow-md`. An agent composes a look on the element it is writing. A coloured stripe on the left edge of a box is two such atoms.
 
 In Tidgrid colour, border, shadow and type are reachable only through a role, and a role is decided once, in the vocabulary. Layout stays free: atoms on token scales, because geometry does not pull a design off course. See [roles](/docs/roles) and [layout atoms](/docs/layout-atoms).
 
-The same panel, as an agent writes it with utility classes and with a role:
+The same content, as an agent writes it with utility classes and with roles:
 
 {% comment %}Every sample on this page shows classes, it does not use them.{% endcomment %}
 <!-- tidgrid-ignore-start -->
@@ -87,10 +87,10 @@ An agent knows Tailwind's class names by heart, and writes them from memory: the
 
 | | Tailwind | Tidgrid |
 |---|---|---|
-| Colour, border, shadow | a class on every element: `border-blue-500`, `shadow-md` | only through a role |
+| Colour, border, shadow | classes on the element: `border-blue-500`, `shadow-md` | only through a role |
 | A value of your own | `w-[137px]` and `bg-[#bada55]` generate a class | `build` fails; the value belongs in a token |
 | An unknown class | thrown away, no CSS | `check` fails |
-| The same style in several places | repeated class lists, handled with components, loops or editing | `build` fails when the same lines are in several roles; they become a mixin set |
+| The same look in several places | the class list is repeated, or the project extracts it: a loop, a component or partial, a custom CSS class | one role, named once; lines that several roles share become a mixin set, or `build` fails |
 | A class name built from pieces: `text-${tone}-600` | no CSS for the names that do not exist | `check` fails |
 | A style nothing uses | not generated | `check` fails on a role nothing uses |
 
@@ -98,7 +98,7 @@ An agent knows Tailwind's class names by heart, and writes them from memory: the
 
 Tailwind with a theme that holds only your own colours does much of this.
 
-A theme with its own palette stops the wrong red: `--color-*: initial` removes the default colours, and only yours are left as utilities. The colour utilities and `border-l-4` are still there, and with them a stripe in the right colour on the left edge of a box. In Tidgrid the vocabulary has no such pair until a role makes it.
+A theme with its own palette stops the wrong red: `--color-*: initial` removes the default palette, and your own colours take its place. The colour utilities and `border-l-4` are still there, and with them a stripe in the right colour on the left edge of a box. In Tidgrid the vocabulary has no such pair until a role makes it.
 
 ## Where Tailwind is the right choice
 
